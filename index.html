@@ -26,8 +26,10 @@
             align-items: center;
             justify-content: center;
             position: relative;
-            padding: 8rem 2rem;
+            padding: 8rem 1.5rem;
         }
+        
+        /* Navigation Styling */
         .nav-link {
             font-size: 0.7rem;
             letter-spacing: 0.2em;
@@ -37,6 +39,24 @@
         }
         .nav-link:hover {
             color: #fff;
+        }
+
+        /* Mobile Menu Overlay */
+        #mobile-menu-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.98);
+            z-index: 100;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.4s ease;
+        }
+        #mobile-menu-overlay.active {
+            display: flex;
+            opacity: 1;
         }
 
         /* Video Elements */
@@ -113,16 +133,32 @@
 <body class="antialiased text-white">
 
     <!-- Header Navigation -->
-    <header class="fixed top-0 left-0 right-0 z-50 p-8 mix-blend-difference">
+    <header class="fixed top-0 left-0 right-0 z-[60] p-6 md:p-8 mix-blend-difference">
         <div class="max-w-7xl mx-auto flex items-center justify-between">
             <a href="#home" class="text-sm font-bold tracking-tighter uppercase text-white">ZINSOO</a>
-            <nav class="space-x-8">
+            
+            <!-- Desktop Menu -->
+            <nav class="hidden md:flex space-x-8">
                 <a href="#work" onclick="scrollToSection('work')" class="nav-link">PROJECTS</a>
                 <a href="#info" onclick="scrollToSection('info')" class="nav-link">PROFILE</a>
                 <button onclick="copyEmailToClipboard()" class="nav-link">CONTACT</button>
             </nav>
+
+            <!-- Mobile Menu Toggle -->
+            <button onclick="toggleMobileMenu()" class="md:hidden text-[10px] tracking-[0.3em] uppercase text-white font-medium">
+                <span id="menu-toggle-text">MENU</span>
+            </button>
         </div>
     </header>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" onclick="toggleMobileMenu()">
+        <nav class="flex flex-col items-center space-y-10">
+            <a href="#work" onclick="scrollToSection('work')" class="text-xl tracking-[0.4em] font-light text-gray-400 hover:text-white transition">PROJECTS</a>
+            <a href="#info" onclick="scrollToSection('info')" class="text-xl tracking-[0.4em] font-light text-gray-400 hover:text-white transition">PROFILE</a>
+            <button onclick="copyEmailToClipboard()" class="text-xl tracking-[0.4em] font-light text-gray-400 hover:text-white transition uppercase">CONTACT</button>
+        </nav>
+    </div>
 
     <main>
         
@@ -130,7 +166,8 @@
         <section id="home" class="section-full-screen bg-black">
             <div class="text-center z-10 p-4 max-w-4xl mx-auto">
                 <span class="label mb-4">AI Content Creator · Video Director</span>
-                <h1 class="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter text-white mb-6 uppercase">
+                <!-- Adjusted title size from 6xl/8xl/9xl to 5xl/7xl/8xl -->
+                <h1 class="text-5xl sm:text-7xl md:text-8xl font-black tracking-tighter text-white mb-6 uppercase leading-tight">
                     PROMPTFILM<br>REEL
                 </h1>
                 <div class="mt-24">
@@ -175,7 +212,6 @@
             </div>
 
             <!-- Magazine Series 16:9 -->
-            <!-- Item 01 -->
             <div class="section-full-screen flex-col border-b border-gray-900/30">
                 <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
                     <div class="video-controls-overlay">
@@ -205,7 +241,6 @@
                 </div>
             </div>
 
-            <!-- Item 02 -->
             <div class="section-full-screen flex-col border-b border-gray-900/30">
                 <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
                     <div class="video-controls-overlay">
@@ -235,7 +270,6 @@
                 </div>
             </div>
 
-            <!-- Item 03 -->
             <div class="section-full-screen flex-col border-b border-gray-900/30">
                 <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
                     <div class="video-controls-overlay">
@@ -327,7 +361,7 @@
 
             <!-- Project: Viral Performance (Video Grid) -->
             <div class="section-full-screen flex-col">
-                <div class="text-center mb-16">
+                <div class="text-center mb-16 px-4">
                     <span class="label mb-2">VIRAL PERFORMANCE</span>
                     <p class="text-white text-3xl md:text-5xl font-black tracking-tighter uppercase italic">17,000,000+ TOTAL VIEWS</p>
                 </div>
@@ -367,7 +401,7 @@
         </section>
 
         <!-- 3. Profile Info Section -->
-        <section id="info" class="flex flex-col items-center justify-center py-32 bg-black border-t border-gray-900/30">
+        <section id="info" class="flex flex-col items-center justify-center py-40 bg-black border-t border-gray-900/30">
             <div class="max-w-3xl w-full px-6 text-center">
                 <h2 class="label mb-8">ZINSOO | PROFILE</h2>
                 
@@ -393,13 +427,34 @@
     </main>
 
     <!-- Footer -->
-    <footer class="py-8 text-center bg-black border-t border-gray-900/10">
-        <p class="text-[9px] uppercase tracking-[0.6em] font-mono opacity-20">&copy; 2025 ZINSOO. ALL RIGHTS RESERVED.</p>
+    <footer class="py-8 text-center bg-black opacity-30">
+        <p class="text-[9px] uppercase tracking-[0.6em] font-mono">&copy; 2025 ZINSOO. ALL RIGHTS RESERVED.</p>
     </footer>
 
     <script>
         function scrollToSection(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            // Close mobile menu if open
+            const menu = document.getElementById('mobile-menu-overlay');
+            const menuText = document.getElementById('menu-toggle-text');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                menuText.textContent = 'MENU';
+            }
+        }
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu-overlay');
+            const menuText = document.getElementById('menu-toggle-text');
+            const isActive = menu.classList.contains('active');
+            
+            if (isActive) {
+                menu.classList.remove('active');
+                menuText.textContent = 'MENU';
+            } else {
+                menu.classList.add('active');
+                menuText.textContent = 'CLOSE';
+            }
         }
 
         function copyEmailToClipboard() {
@@ -415,6 +470,14 @@
             msg.textContent = 'Email copied to clipboard.';
             msg.classList.remove('hidden');
             setTimeout(() => msg.classList.add('hidden'), 2000);
+
+            // Close mobile menu if open
+            const menu = document.getElementById('mobile-menu-overlay');
+            const menuText = document.getElementById('menu-toggle-text');
+            if (menu.classList.contains('active')) {
+                menu.classList.remove('active');
+                menuText.textContent = 'MENU';
+            }
         }
 
         function handleVideoToggle(wrapper) {
