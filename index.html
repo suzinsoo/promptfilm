@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZINSOO | VIDEO PORTFOLIO</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <style>
+        /* Professional Industry Standard Theme */
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #000000;
+            color: #E5E7EB;
+            overflow-x: hidden;
+            letter-spacing: -0.01em;
+        }
+        .section-full-screen {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            padding: 8rem 2rem;
+        }
+        .nav-link {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: #666;
+            transition: color 0.3s;
+        }
+        .nav-link:hover {
+            color: #fff;
+        }
+
+        /* Video Elements */
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+            box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.8);
+            cursor: pointer;
+        }
+
+        .video-wrapper {
+            position: relative;
+            background-color: #0a0a0a;
+            overflow: hidden;
+            border-radius: 2px;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .video-wrapper:hover {
+            transform: scale(1.01);
+        }
+
+        /* Video Controls Overlay */
+        .video-controls-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.4);
+            opacity: 1;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
+            z-index: 10;
+        }
+        .is-playing .video-controls-overlay {
+            opacity: 0;
+        }
+        .play-btn-icon {
+            width: 54px;
+            height: 54px;
+            fill: white;
+            opacity: 0.8;
+        }
+
+        /* Typography & Labels */
+        .label {
+            font-size: 0.65rem;
+            color: #666;
+            text-transform: uppercase;
+            letter-spacing: 0.12em;
+            margin-bottom: 0.35rem;
+            display: block;
+        }
+        .value {
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 3px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #000;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+        }
+    </style>
+</head>
+<body class="antialiased text-white">
+
+    <!-- Header Navigation -->
+    <header class="fixed top-0 left-0 right-0 z-50 p-8 mix-blend-difference">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <a href="#home" class="text-sm font-bold tracking-tighter uppercase text-white">ZINSOO</a>
+            <nav class="space-x-8">
+                <a href="#work" onclick="scrollToSection('work')" class="nav-link">PROJECTS</a>
+                <a href="#info" onclick="scrollToSection('info')" class="nav-link">PROFILE</a>
+                <button onclick="copyEmailToClipboard()" class="nav-link">CONTACT</button>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        
+        <!-- 1. Hero Section -->
+        <section id="home" class="section-full-screen bg-black">
+            <div class="text-center z-10 p-4 max-w-4xl mx-auto">
+                <span class="label mb-4">AI Content Creator · Video Director</span>
+                <h1 class="text-6xl sm:text-8xl md:text-9xl font-black tracking-tighter text-white mb-6 uppercase">
+                    PROMPTFILM<br>REEL
+                </h1>
+                <div class="mt-24">
+                    <p class="text-[10px] tracking-[0.5em] text-gray-600 uppercase cursor-pointer hover:text-white transition" onclick="scrollToSection('work')">
+                        Scroll to Explore Projects
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Projects Section -->
+        <section id="work" class="bg-black">
+            
+            <!-- Project: Shinhan Card -->
+            <div class="section-full-screen flex-col border-b border-gray-900/30">
+                <div class="w-full max-w-sm mx-auto aspect-[9/16] video-wrapper mb-12" onclick="handleVideoToggle(this)">
+                    <div class="video-controls-overlay">
+                        <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <video playsinline>
+                        <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EB%88%88%EC%B9%98%EA%B2%8C%EC%9E%84_1.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="max-w-5xl w-full grid grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                    <div>
+                        <span class="label">Client</span>
+                        <p class="value">Shinhan Card</p>
+                    </div>
+                    <div>
+                        <span class="label">Project</span>
+                        <p class="value">SOL PAY Campaign</p>
+                    </div>
+                    <div>
+                        <span class="label">Role</span>
+                        <p class="value">AI Video Production</p>
+                    </div>
+                    <div class="lg:text-right">
+                        <span class="label">Year</span>
+                        <p class="value font-mono">2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Magazine Series 16:9 -->
+            <!-- Item 01 -->
+            <div class="section-full-screen flex-col border-b border-gray-900/30">
+                <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
+                    <div class="video-controls-overlay">
+                        <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <video playsinline>
+                        <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EC%9E%90%EB%A7%A4%ED%8E%B8.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="max-w-5xl w-full grid grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                    <div>
+                        <span class="label">Client</span>
+                        <p class="value">Shinsegae International</p>
+                    </div>
+                    <div>
+                        <span class="label">Project</span>
+                        <p class="value">Beauty The Big Sale - Sisters</p>
+                    </div>
+                    <div>
+                        <span class="label">Role</span>
+                        <p class="value">AI Video Production</p>
+                    </div>
+                    <div class="lg:text-right">
+                        <span class="label">Year</span>
+                        <p class="value font-mono">2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 02 -->
+            <div class="section-full-screen flex-col border-b border-gray-900/30">
+                <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
+                    <div class="video-controls-overlay">
+                        <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <video playsinline>
+                        <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EC%A7%81%EC%9E%A5%ED%8E%B8.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="max-w-5xl w-full grid grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                    <div>
+                        <span class="label">Client</span>
+                        <p class="value">Shinsegae International</p>
+                    </div>
+                    <div>
+                        <span class="label">Project</span>
+                        <p class="value">Beauty The Big Sale - Office</p>
+                    </div>
+                    <div>
+                        <span class="label">Role</span>
+                        <p class="value">AI Video Production</p>
+                    </div>
+                    <div class="lg:text-right">
+                        <span class="label">Year</span>
+                        <p class="value font-mono">2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 03 -->
+            <div class="section-full-screen flex-col border-b border-gray-900/30">
+                <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
+                    <div class="video-controls-overlay">
+                        <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <video playsinline>
+                        <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EC%BB%A4%ED%94%8C%ED%8E%B8.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="max-w-5xl w-full grid grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                    <div>
+                        <span class="label">Client</span>
+                        <p class="value">Shinsegae International</p>
+                    </div>
+                    <div>
+                        <span class="label">Project</span>
+                        <p class="value">Beauty The Big Sale - Couple</p>
+                    </div>
+                    <div>
+                        <span class="label">Role</span>
+                        <p class="value">AI Video Production</p>
+                    </div>
+                    <div class="lg:text-right">
+                        <span class="label">Year</span>
+                        <p class="value font-mono">2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project: Lucky Draw -->
+            <div class="section-full-screen flex-col border-b border-gray-900/30">
+                <div class="w-full max-w-5xl mx-auto aspect-[16/9] video-wrapper mb-12" onclick="handleVideoToggle(this)">
+                    <div class="video-controls-overlay">
+                        <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <video playsinline>
+                        <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EB%9F%AD%ED%82%A4%EB%93%9C%EB%A1%9C%EC%9A%B0.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="max-w-5xl w-full grid grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                    <div>
+                        <span class="label">Client</span>
+                        <p class="value">Shinsegae International</p>
+                    </div>
+                    <div>
+                        <span class="label">Project</span>
+                        <p class="value">9월 Lucky Draw Campaign</p>
+                    </div>
+                    <div>
+                        <span class="label">Role</span>
+                        <p class="value">AI Video Production</p>
+                    </div>
+                    <div class="lg:text-right">
+                        <span class="label">Year</span>
+                        <p class="value font-mono">2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project: Pixel Game -->
+            <div class="section-full-screen flex-col border-b border-gray-900/30">
+                <div class="w-full max-w-sm mx-auto aspect-[9/16] video-wrapper mb-12" onclick="handleVideoToggle(this)">
+                    <div class="video-controls-overlay">
+                        <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                    </div>
+                    <video playsinline>
+                        <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%ED%94%BD%EC%85%80%20%EA%B2%8C%EC%9E%84.mp4" type="video/mp4">
+                    </video>
+                </div>
+                <div class="max-w-5xl w-full grid grid-cols-2 lg:grid-cols-4 gap-8 px-4">
+                    <div>
+                        <span class="label">Project</span>
+                        <p class="value">Pixel Game Art</p>
+                    </div>
+                    <div>
+                        <span class="label">Format</span>
+                        <p class="value">AI Creative Artwork</p>
+                    </div>
+                    <div>
+                        <span class="label">Type</span>
+                        <p class="value">R&D / Personal</p>
+                    </div>
+                    <div class="lg:text-right">
+                        <span class="label">Year</span>
+                        <p class="value font-mono">2025</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Project: Viral Performance (Video Grid) -->
+            <div class="section-full-screen flex-col">
+                <div class="text-center mb-16">
+                    <span class="label mb-2">VIRAL PERFORMANCE</span>
+                    <p class="text-white text-3xl md:text-5xl font-black tracking-tighter uppercase italic">17,000,000+ TOTAL VIEWS</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 w-full max-w-6xl mx-auto px-4">
+                    <div class="video-wrapper aspect-[9/16]" onclick="handleVideoToggle(this)">
+                        <div class="video-controls-overlay">
+                            <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <video playsinline>
+                            <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EC%A7%81%EC%9E%A5%EC%9D%B8.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-wrapper aspect-[9/16]" onclick="handleVideoToggle(this)">
+                        <div class="video-controls-overlay">
+                            <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <video playsinline>
+                            <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EC%88%AD%EC%9D%B4%EC%B0%90.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                    <div class="video-wrapper aspect-[9/16]" onclick="handleVideoToggle(this)">
+                        <div class="video-controls-overlay">
+                            <svg class="play-btn-icon" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                        </div>
+                        <video playsinline>
+                            <source src="https://cfeheiwnhbhwipvq.public.blob.vercel-storage.com/%EC%A7%9A%ED%94%BC%ED%8B%B0.mp4" type="video/mp4">
+                        </video>
+                    </div>
+                </div>
+
+                <div class="mt-20 text-center">
+                    <a href="https://www.instagram.com/filmprompt/" target="_blank" class="text-[10px] tracking-[0.4em] text-gray-500 hover:text-white transition uppercase">Visit Instagram Channel &rarr;</a>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- 3. Profile Info Section -->
+        <section id="info" class="flex flex-col items-center justify-center py-32 bg-black border-t border-gray-900/30">
+            <div class="max-w-3xl w-full px-6 text-center">
+                <h2 class="label mb-8">ZINSOO | PROFILE</h2>
+                
+                <div class="space-y-6 text-xs font-mono text-gray-500 uppercase tracking-wider">
+                    <p>Location: Seoul, South Korea</p>
+                    <div class="flex flex-col items-center pt-4">
+                        <span class="label">Contact</span>
+                        <span class="text-sm text-white underline cursor-pointer hover:text-gray-400 font-bold tracking-normal block mb-4" onclick="copyEmailToClipboard()">
+                            suzinso0z@gmail.com
+                        </span>
+                        
+                        <!-- Instagram Personal Link Directly Under Email -->
+                        <a href="http://www.instagram.com/zinsooz" target="_blank" class="text-gray-600 hover:text-white transition-colors duration-300">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                                <path fill-rule="evenodd" d="M12.315 2c2.43 0 2.784.013 3.808.06 1.064.049 1.791.218 2.427.465a4.902 4.902 0 011.772 1.153 4.902 4.902 0 011.153 1.772c.247.636.416 1.363.465 2.427.048 1.067.06 1.407.06 4.123v.08c0 2.643-.012 2.987-.06 4.043-.049 1.064-.218 1.791-.465 2.427a4.902 4.902 0 01-1.153 1.772 4.902 4.902 0 01-1.772 1.153c-.636.247-1.363.416-2.427.465-1.067.048-1.407.06-4.123.06h-.08c-2.643 0-2.987-.012-4.043-.06-1.064-.049-1.791-.218-2.427-.465a4.902 4.902 0 01-1.772-1.153 4.902 4.902 0 01-1.153-1.772c-.247-.636-.416-1.363-.465-2.427-.047-1.024-.06-1.379-.06-3.808v-.63c0-2.43.013-2.784.06-3.808.049-1.064.218-1.791.465-2.427a4.902 4.902 0 011.153-1.772A4.902 4.902 0 015.45 2.525c.636-.247 1.363-.416 2.427-.465C8.901 2.013 9.256 2 11.685 2h.63zm-.081 1.802h-.468c-2.456 0-2.784.011-3.807.058-.975.045-1.504.207-1.857.344-.467.182-.8.398-1.15.748-.35.35-.566.683-.748 1.15-.137.353-.3.882-.344 1.857-.047 1.023-.058 1.351-.058 3.807v.468c0 2.456.011 2.784.058 3.807.045.975.207 1.504.344 1.857.182.466.399.8.748 1.15.35.35.683.566 1.15.748.353.137.882.3 1.857.344 1.054.048 1.37.058 4.041.058h.08c2.597 0 2.917-.01 3.96-.058.976-.045 1.505-.207 1.858-.344.466-.182.8-.398 1.15-.748.35-.35.566-.683.748-1.15.137-.353.3-.882.344-1.857.048-1.055.058-1.37.058-4.041v-.08c0-2.597-.01-2.917-.058-3.96-.045-.976-.207-1.505-.344-1.858a3.097 3.097 0 00-.748-1.15 3.098 3.098 0 00-1.15-.748c-.353-.137-.882-.3-1.857-.344-1.023-.047-1.351-.058-3.807-.058zM12 6.865a5.135 5.135 0 110 10.27 5.135 5.135 0 010-10.27zm0 1.802a3.333 3.333 0 100 6.666 3.333 3.333 0 000-6.666zm5.338-3.205a1.2 1.2 0 110 2.4 1.2 1.2 0 010-2.4z" clip-rule="evenodd" />
+                            </svg>
+                        </a>
+                    </div>
+                    <p id="copyMessage" class="text-blue-500 mt-2 hidden normal-case"></p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-8 text-center bg-black border-t border-gray-900/10">
+        <p class="text-[9px] uppercase tracking-[0.6em] font-mono opacity-20">&copy; 2025 ZINSOO. ALL RIGHTS RESERVED.</p>
+    </footer>
+
+    <script>
+        function scrollToSection(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        function copyEmailToClipboard() {
+            const email = 'suzinso0z@gmail.com';
+            const textArea = document.createElement("textarea");
+            textArea.value = email;
+            document.body.appendChild(textArea);
+            textArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(textArea);
+            
+            const msg = document.getElementById('copyMessage');
+            msg.textContent = 'Email copied to clipboard.';
+            msg.classList.remove('hidden');
+            setTimeout(() => msg.classList.add('hidden'), 2000);
+        }
+
+        function handleVideoToggle(wrapper) {
+            const video = wrapper.querySelector('video');
+            if (video.paused) {
+                document.querySelectorAll('video').forEach(v => {
+                    if (v !== video) {
+                        v.pause();
+                        v.parentElement.classList.remove('is-playing');
+                    }
+                });
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        wrapper.classList.add('is-playing');
+                    }).catch(error => {
+                        console.log("Playback blocked:", error);
+                    });
+                }
+            } else {
+                video.pause();
+                wrapper.classList.remove('is-playing');
+            }
+        }
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                const video = entry.target;
+                if (!entry.isIntersecting) {
+                    video.pause();
+                    video.parentElement.classList.remove('is-playing');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('video').forEach(video => {
+            observer.observe(video);
+        });
+    </script>
+</body>
+</html>
